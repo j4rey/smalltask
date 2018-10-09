@@ -1,0 +1,15 @@
+<div class="form-group">
+  <div class="input-group">
+    <ng-container *ngIf="abled; else elseTemplate">
+      <select [(ngModel)]="value" (change)="pushChanges($event.target.value)" class="form-control" name="Gender">
+        <!-- <option *ngFor="let dept of data" [value]='dept.ID'>{{dept.DepartmentName}}</option> -->
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+    </ng-container>
+    <ng-template #elseTemplate>
+      {{value}}
+    </ng-template>
+  </div>
+</div>

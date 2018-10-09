@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Departments</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary" (click)="ShowDialog()">Add</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table border="1" class="table">
+        <thead>
+          <tr class="thead-light">
+            <!-- <th scope="col">ID</th> -->
+            <th scope="col">Action</th>
+            <th scope="col">Department</th>
+            <th scope="col">Location</th>
+            <th scope="col">Department Head</th>
+            <th scope="col">Employees Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr scope="row" *ngFor="let dept of departments">
+            <!-- <td><app-new-custom-input [(ngModel)]="dept.ID" [abled]="dept.edit"></app-new-custom-input></td> -->
+            <td>
+              <span class="link" (click)="ShowDialog(dept.ID)">Edit</span> &nbsp;
+              <span class="link" (click)="Delete(dept)">Delete</span>
+            </td>
+            <td>
+              <a [routerLink]='[dept.ID]'>{{dept.DepartmentName}}</a>
+            </td>
+            <td>
+              <app-new-custom-input [(ngModel)]="dept.Location" [abled]="dept.edit"></app-new-custom-input>
+            </td>
+            <td>
+              {{dept.DepartmentHeadName}}
+            </td>
+            <td>
+              {{dept.NoOfEmps}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- <br>{{data|json}} -->

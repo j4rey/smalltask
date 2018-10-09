@@ -1,0 +1,10 @@
+<div class="form-group">
+  <div class="input-group">
+    <ng-container *ngIf="abled; else elseTemplate">
+      <input [type]="type" step=".01" class="form-control" required [(ngModel)]="value" (input)="pushChanges($event.target.value)">
+    </ng-container>
+    <ng-template #elseTemplate>
+      {{type=="number"?(value|number : '1.2'):(value)}}
+    </ng-template>
+  </div>
+</div>

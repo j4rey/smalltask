@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Department Details</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      ID:{{department.ID}}
+      <br>
+      Department: {{department.DepartmentName}}
+      <br>
+      Location: {{department.Location}}
+      <br>
+      Department Head: {{DeparmentHeadName}}
+      <table border="1" class="table">
+        <thead>
+          <tr class="thead-light">
+            <!-- <th scope="col">ID</th> -->
+            <th scope="col">Action</th>
+            <th scope="col">Name</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Department</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr scope="row" *ngFor="let emp of employees">
+            <!-- <td><app-new-custom-input [(ngModel)]="emp.ID" [abled]="emp.edit" [name]="'ID'"></app-new-custom-input></td> -->
+            <td>
+              <span class="link" (click)="OnSubmitClicked(emp)" *ngIf="emp.edit">Update</span>&nbsp;
+              <span class="link" (click)="toggle(emp)">{{emp.edit?'Cancel':'Edit'}}</span>&nbsp;
+              <span class="link" (click)="Delete(emp)">Delete</span>&nbsp;
+            </td>
+            <td>
+              <app-new-custom-input [(ngModel)]="emp.Name" [abled]="emp.edit" [name]="'Name'" [type]="'text'"></app-new-custom-input>
+            </td>
+            <td>
+              <gender-dropdown [(ngModel)]="emp.Gender" [abled]="emp.edit"></gender-dropdown>
+            </td>
+            <td>
+              <app-new-custom-input [(ngModel)]="emp.Salary" [abled]="emp.edit" [name]="'Salary'" [type]="'number'"></app-new-custom-input>
+            </td>
+            <td>
+              <ng-container *ngIf="emp.edit; else deptNameText">
+                <select [(ngModel)]="emp.DepartmentId" class="form-control" name="DepartmentId">
+                  <option *ngFor="let dept of departments" [value]='dept.ID'>{{dept.DepartmentName}}</option>
+                </select>
+              </ng-container>
+              <ng-template #deptNameText>
+                {{GetDeparmentNameById(emp.DepartmentId)}}
+              </ng-template>
+            </td>
+          </tr>
+          <tr>
+            <!-- <td>{{newEmp.ID}}</td> -->
+            <td>
+              <span class="link" (click)="OnAdd()">Add</span>&nbsp;
+              <span class="link" (click)="OnReset()">Reset</span>&nbsp;
+            </td>
+            <td>
+              <input type="text" class="form-control" [(ngModel)]="newEmp.Name">
+            </td>
+            <td>
+              <gender-dropdown [(ngModel)]="newEmp.Gender"></gender-dropdown>
+            <td>
+              <input type="number" class="form-control" [(ngModel)]="newEmp.Salary">
+            </td>
+            <td>
+              <select [(ngModel)]="newEmp.DepartmentId" class="form-control" name="DepartmentId">
+                <option *ngFor="let dept of departments" [value]='dept.ID'>{{dept.DepartmentName}}</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- {{department|json}}<br>
+{{emps|json}} -->
